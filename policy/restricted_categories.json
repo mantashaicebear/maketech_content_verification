@@ -1,0 +1,101 @@
+{
+  "restricted_categories": [
+    "weapons",
+    "explosives",
+    "drugs",
+    "prescription_medicine",
+    "alcohol",
+    "tobacco",
+    "counterfeit",
+    "human_organs",
+    "wildlife",
+    "harmful_chemicals",
+    "surveillance",
+    "hacking_tools",
+    "gambling",
+    "adult_content",
+    "hate_speech",
+    "pyramid_schemes",
+    "illegal_services"
+  ],
+  "high_risk_categories": [
+    "weapons",
+    "drugs",
+    "adult_content",
+    "counterfeit",
+    "explosives"
+  ],
+  "medium_risk_categories": [
+    "prescription_medicine",
+    "alcohol",
+    "tobacco",
+    "surveillance",
+    "gambling",
+    "hacking_tools"
+  ],
+  "business_domains": [
+    "food",
+    "tech",
+    "education",
+    "healthcare",
+    "finance",
+    "fashion",
+    "electronics",
+    "automotive",
+    "real_estate",
+    "entertainment",
+    "sports",
+    "travel",
+    "beauty",
+    "home"
+  ],
+  "rules": {
+    "single_domain_business": {
+      "description": "Business must post content only in their registered domain",
+      "strictness": "high",
+      "allowed_actions": ["post_in_domain"],
+      "blocked_actions": ["post_outside_domain"]
+    },
+    "marketplace_business": {
+      "description": "Business can post in multiple domains but not in restricted categories",
+      "strictness": "medium",
+      "allowed_actions": ["post_multiple_domains", "cross_sell"],
+      "blocked_actions": ["post_restricted_categories"]
+    },
+    "multi_domain_business": {
+      "description": "Business can operate in multiple specified domains",
+      "strictness": "low",
+      "allowed_actions": ["post_specified_domains"],
+      "blocked_actions": ["post_unspecified_domains", "post_restricted_categories"]
+    }
+  },
+  "warning_messages": {
+    "domain_mismatch": "Your content does not match your registered business domain. Please post only content related to {domain}.",
+    "restricted_content": "This content falls under restricted category '{category}' which is not allowed on our platform.",
+    "low_confidence": "We couldn't confidently classify your content. Please provide clearer descriptions.",
+    "needs_review": "Your content requires manual review before it can be published.",
+    "suspicious_content": "Your content has been flagged for manual review due to potential policy violations."
+  },
+  "severity_levels": {
+    "low": {
+      "action": "warn",
+      "notification": "email",
+      "penalty": "none"
+    },
+    "medium": {
+      "action": "block_and_review",
+      "notification": "email_and_in_app",
+      "penalty": "warning"
+    },
+    "high": {
+      "action": "block",
+      "notification": "immediate",
+      "penalty": "temporary_suspension"
+    },
+    "critical": {
+      "action": "block_and_report",
+      "notification": "immediate_escalation",
+      "penalty": "permanent_ban"
+    }
+  }
+}
