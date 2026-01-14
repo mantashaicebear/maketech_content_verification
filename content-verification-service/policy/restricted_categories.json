@@ -1,0 +1,12 @@
+{
+  "restricted_categories": [
+    "Weapons",
+    "Explosives",
+    "Drugs",
+    "Poisons",
+    "Counterfeit",
+    "Human organs",
+    "Surveillance devices",
+    "Live animals"
+  ]
+}
