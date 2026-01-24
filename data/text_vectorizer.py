@@ -1,47 +1,53 @@
 """
-Text Vectorization - Convert text to TF-IDF features.
+Text Vectorizer for Content Verification - FIXED
 """
 
-from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from typing import List
 
-
-def vectorize_text(texts, max_features=5000):
-    """
-    Convert cleaned texts to TF-IDF feature matrix.
+class TextVectorizer:
+    """Text vectorization using TF-IDF - FIXED"""
     
-    Args:
-        texts: List or Series of cleaned text strings
-        max_features: Maximum vocabulary size (default 5000)
+    def __init__(self, max_features: int = 1000):
+        self.vectorizer = TfidfVectorizer(
+            max_features=max_features,
+            stop_words='english',
+            ngram_range=(1, 2),
+            min_df=1,
+            max_df=0.95
+        )
+        self.is_fitted = False
     
-    Returns:
-        Feature matrix (sparse matrix) and feature names
-    """
-    vectorizer = TfidfVectorizer(
-        max_features=max_features,
-        ngram_range=(1, 2),  # Use unigrams and bigrams
-        min_df=2,
-        max_df=0.8
-    )
+    def fit(self, texts: List[str]):
+        """Fit the vectorizer"""
+        if not texts:
+            raise ValueError("Cannot fit vectorizer with empty texts")
+        
+        self.vectorizer.fit(texts)
+        self.is_fitted = True
+        return self
     
-    X = vectorizer.fit_transform(texts)
-    feature_names = vectorizer.get_feature_names_out()
+    def transform(self, texts: List[str]) -> np.ndarray:
+        """Transform texts to features"""
+        if not self.is_fitted:
+            # Try to fit with the provided texts
+            if texts:
+                self.fit(texts)
+            else:
+                raise ValueError("Vectorizer must be fitted first and no texts provided for fitting")
+        
+        return self.vectorizer.transform(texts).toarray()
     
-    return X, feature_names, vectorizer
-
-
-if __name__ == "__main__":
-    # Example
-    from text_preprocessor import preprocess_text
+    def fit_transform(self, texts: List[str]) -> np.ndarray:
+        """Fit and transform"""
+        if not texts:
+            raise ValueError("Cannot fit and transform empty texts")
+        
+        return self.vectorizer.fit_transform(texts).toarray()
     
-    texts = [
-        "fresh organic coffee beans",
-        "military tactical equipment",
-        "python programming course"
-    ]
-    
-    cleaned_texts = [preprocess_text(t) for t in texts]
-    X, features, vectorizer = vectorize_text(cleaned_texts)
-    
-    print(f"Feature matrix shape: {X.shape}")
-    print(f"Features: {len(features)}")
+    def get_feature_names(self):
+        """Get feature names"""
+        if not self.is_fitted:
+            return []
+        return self.vectorizer.get_feature_names_out().tolist()

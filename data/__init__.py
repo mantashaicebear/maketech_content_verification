@@ -1,11 +1,9 @@
-"""Data module - Dataset creation, preprocessing, vectorization."""
+"""
+Data module for content verification
+"""
 
-from .dataset_generator import create_dummy_dataset
-from .text_preprocessor import preprocess_text
-from .text_vectorizer import vectorize_text
+from .text_preprocessor import TextPreprocessor
+from .text_vectorizer import TextVectorizer
+from .dataset_generator import DatasetGenerator
 
-__all__ = [
-    'create_dummy_dataset',
-    'preprocess_text',
-    'vectorize_text',
-]
+__all__ = ['TextPreprocessor', 'TextVectorizer', 'DatasetGenerator']

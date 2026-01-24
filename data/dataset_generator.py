@@ -1,94 +1,44 @@
 """
-Dummy Dataset Generator for Content Verification
-Creates realistic synthetic business content for classification.
+Dataset Generator for Content Verification
 """
 
 import pandas as pd
 import random
+from typing import List, Dict
 
-# Sample texts for each category
-SAMPLES = {
-    "Food": [
-        "Fresh organic vegetables, free home delivery available",
-        "Best pizza in town with premium cheese and basil",
-        "Coffee shop opening - finest quality beans imported",
-        "Catering service for weddings and events",
-        "Restaurant reservation system now online",
-    ],
-    "Tech": [
-        "Latest smartphone with 5G and great camera",
-        "Software update improves battery life",
-        "Python programming course available",
-        "Cloud storage solution secure and affordable",
-        "New app reduces mobile data usage",
-    ],
-    "Education": [
-        "Online degree program accredited and affordable",
-        "Scholarship opportunities for students",
-        "Data science certification course",
-        "Language learning in 6 months",
-        "Free webinar on career development",
-    ],
-    "Fashion": [
-        "New winter collection sustainable fabrics",
-        "50% discount on all accessories",
-        "Custom tailoring service available",
-        "Designer collaboration exclusive pieces",
-        "Handcrafted jewelry with certified gemstones",
-    ],
-    "Finance": [
-        "Invest in mutual funds with good returns",
-        "Financial planning consultation for retirement",
-        "Savings account with high interest rates",
-        "Insurance plans for health and life",
-        "Stock trading platform with zero fees",
-    ],
-    "Weapons": [
-        "Military equipment for tactical training",
-        "Firearms dealer licensed and authorized",
-        "Body armor and helmets for professionals",
-        "Ammunition supplier bulk orders accepted",
-        "Combat training facility self defense courses",
-    ],
-    "Drugs": [
-        "Pharmaceutical distributor licensed",
-        "Online pharmacy medications available",
-        "Herbal supplements natural remedies",
-        "Pain relief medication available",
-        "Drug testing kits available",
-    ],
-    "Explosives": [
-        "Fireworks store licensed pyrotechnics",
-        "Demolition services professional experts",
-        "Quarry explosives for mining operations",
-        "Dynamite manufacturer industrial use",
-        "Explosive training courses available",
-    ],
-}
-
-def create_dummy_dataset(samples_per_category=40, random_seed=42):
-    """
-    Create dataset with business content texts and categories.
+class DatasetGenerator:
+    """Generate synthetic dataset for training"""
     
-    Args:
-        samples_per_category: number of samples per category
-        random_seed: for reproducibility
+    def __init__(self):
+        self.categories = {
+            'food': ['food', 'restaurant', 'recipe', 'cooking', 'meal', 'dish', 'eat', 'cuisine'],
+            'tech': ['software', 'coding', 'computer', 'technology', 'app', 'program', 'code', 'digital'],
+            'education': ['learning', 'course', 'study', 'education', 'school', 'teach', 'learn', 'university'],
+            'health': ['medical', 'health', 'doctor', 'hospital', 'medicine', 'fitness', 'wellness', 'care'],
+            'finance': ['investment', 'banking', 'loan', 'finance', 'money', 'stock', 'cash', 'wealth'],
+            'fashion': ['clothing', 'fashion', 'dress', 'style', 'wear', 'apparel', 'outfit', 'trend'],
+            'electronics': ['electronic', 'device', 'gadget', 'phone', 'laptop', 'camera', 'smart', 'tech'],
+            'automotive': ['car', 'vehicle', 'auto', 'motor', 'drive', 'engine', 'transport', 'road'],
+            'real_estate': ['property', 'house', 'home', 'apartment', 'land', 'building', 'rent', 'buy'],
+            'entertainment': ['movie', 'music', 'show', 'film', 'concert', 'performance', 'art', 'media'],
+            'weapons': ['gun', 'rifle', 'pistol', 'weapon', 'firearm', 'ammo', 'bullet', 'combat'],
+            'drugs': ['drug', 'cocaine', 'heroin', 'marijuana', 'weed', 'narcotic', 'opioid', 'pill'],
+            'adult_content': ['adult', 'porn', 'xxx', 'explicit', 'nsfw', 'sexual', 'erotic', 'mature'],
+            'gambling': ['casino', 'betting', 'gamble', 'lottery', 'poker', 'slot', 'bet', 'wager']
+        }
     
-    Returns:
-        DataFrame with 'text' and 'category' columns
-    """
-    random.seed(random_seed)
-    data = []
-    
-    for category, texts in SAMPLES.items():
-        for _ in range(samples_per_category):
-            text = random.choice(texts)
-            data.append({"text": text, "category": category})
-    
-    df = pd.DataFrame(data)
-    df = df.sample(frac=1, random_state=random_seed).reset_index(drop=True)
-    return df
-if __name__ == "__main__":
-    df = create_dummy_dataset(samples_per_category=40)
-    print(f"Dataset created: {df.shape[0]} samples, {df['category'].nunique()} categories")
-    print(df.head())
+    def generate_text(self, category: str) -> str:
+        """Generate a sample text for a category"""
+        keywords = self.categories.get(category, [])
+        if not keywords:
+            return f"This is a sample text about {category}"
+        
+        templates = [
+            f"This is about {random.choice(keywords)} and {random.choice(keywords)}",
+            f"We provide services for {random.choice(keywords)} in {category} industry",
+            f"Learn more about {random.choice(keywords)} for {category} enthusiasts",
+            f"Best {random.choice(keywords)} solutions for your {category} needs",
+            f"Expert advice on {random.choice(keywords)} in the {category} sector"
+        ]
+        
+        return random.choice(templates)
