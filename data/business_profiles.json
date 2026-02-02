@@ -1,0 +1,167 @@
+{
+  "M001": {
+    "name": "Amazon India",
+    "domains": [
+      "electronics",
+      "fashion",
+      "books",
+      "grocery",
+      "beauty",
+      "sports",
+      "automotive",
+      "tech"
+    ]
+  },
+  "M002": {
+    "name": "Flipkart",
+    "domains": [
+      "electronics",
+      "fashion",
+      "books",
+      "grocery",
+      "beauty",
+      "sports",
+      "automotive"
+    ]
+  },
+  "M003": {
+    "name": "Myntra",
+    "domains": [
+      "fashion",
+      "beauty",
+      "sports"
+    ]
+  },
+  "M004": {
+    "name": "Swiggy",
+    "domains": [
+      "food",
+      "grocery"
+    ]
+  },
+  "M005": {
+    "name": "Zomato",
+    "domains": [
+      "food",
+      "grocery"
+    ]
+  },
+  "M006": {
+    "name": "MakeMyTrip",
+    "domains": [
+      "travel",
+      "entertainment"
+    ]
+  },
+  "M007": {
+    "name": "BookMyShow",
+    "domains": [
+      "entertainment",
+      "travel"
+    ]
+  },
+  "M008": {
+    "name": "Nykaa",
+    "domains": [
+      "beauty",
+      "fashion",
+      "health"
+    ]
+  },
+  "B001": {
+    "name": "Food Specialist B001",
+    "domains": [
+      "food"
+    ]
+  },
+  "B002": {
+    "name": "Tech Specialist B002",
+    "domains": [
+      "tech"
+    ]
+  },
+  "B003": {
+    "name": "Education Specialist B003",
+    "domains": [
+      "education"
+    ]
+  },
+  "B004": {
+    "name": "Health Specialist B004",
+    "domains": [
+      "health"
+    ]
+  },
+  "B005": {
+    "name": "Finance Specialist B005",
+    "domains": [
+      "finance"
+    ]
+  },
+  "B006": {
+    "name": "Fashion Specialist B006",
+    "domains": [
+      "fashion"
+    ]
+  },
+  "B007": {
+    "name": "Electronics Specialist B007",
+    "domains": [
+      "electronics"
+    ]
+  },
+  "B008": {
+    "name": "Automotive Specialist B008",
+    "domains": [
+      "automotive"
+    ]
+  },
+  "B009": {
+    "name": "Real_Estate Specialist B009",
+    "domains": [
+      "real_estate"
+    ]
+  },
+  "B010": {
+    "name": "Entertainment Specialist B010",
+    "domains": [
+      "entertainment"
+    ]
+  },
+  "B011": {
+    "name": "Books Specialist B011",
+    "domains": [
+      "books"
+    ]
+  },
+  "B012": {
+    "name": "Travel Specialist B012",
+    "domains": [
+      "travel"
+    ]
+  },
+  "B013": {
+    "name": "Grocery Specialist B013",
+    "domains": [
+      "grocery"
+    ]
+  },
+  "B014": {
+    "name": "Beauty Specialist B014",
+    "domains": [
+      "beauty"
+    ]
+  },
+  "B015": {
+    "name": "Sports Specialist B015",
+    "domains": [
+      "sports"
+    ]
+  },
+  "B057": {
+    "name": "Education Specialist B057",
+    "domains": [
+      "education"
+    ]
+  }
+}

@@ -7,15 +7,17 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from typing import List
 
 class TextVectorizer:
-    """Text vectorization using TF-IDF - FIXED"""
+    """Text vectorization using TF-IDF - Optimized for better accuracy"""
     
-    def __init__(self, max_features: int = 1000):
+    def __init__(self, max_features: int = 1000, ngram_range: tuple = (1, 2)):
         self.vectorizer = TfidfVectorizer(
             max_features=max_features,
             stop_words='english',
-            ngram_range=(1, 2),
+            ngram_range=ngram_range,  # Configurable n-gram range
             min_df=1,
-            max_df=0.95
+            max_df=0.99,
+            lowercase=True,
+            sublinear_tf=True  # Apply sublinear tf scaling for better performance
         )
         self.is_fitted = False
     
@@ -37,6 +39,10 @@ class TextVectorizer:
             else:
                 raise ValueError("Vectorizer must be fitted first and no texts provided for fitting")
         
+        # Handle single item or list
+        if isinstance(texts, str):
+            texts = [texts]
+        
         return self.vectorizer.transform(texts).toarray()
     
     def fit_transform(self, texts: List[str]) -> np.ndarray:
@@ -44,7 +50,9 @@ class TextVectorizer:
         if not texts:
             raise ValueError("Cannot fit and transform empty texts")
         
-        return self.vectorizer.fit_transform(texts).toarray()
+        result = self.vectorizer.fit_transform(texts).toarray()
+        self.is_fitted = True
+        return result
     
     def get_feature_names(self):
         """Get feature names"""
