@@ -4,6 +4,7 @@ from typing import Optional
 class AnalysisRequest(BaseModel):
     user_text: str = Field(..., alias="User_Text", description="The content the user wants to post.")
     registered_domain: str = Field(..., alias="Registered_Domain", description="The verified industry category of the startup.")
+    business_id: Optional[str] = Field(None, alias="Business_ID", description="Optional business ID for domain-specific enforcement.")
 
     class Config:
         populate_by_name = True

@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from app.models import AnalysisRequest, AnalysisResponse
-from app.guard import analyze_content
+from app.trained_model_analyzer import analyze_content
 import uvicorn
 
 app = FastAPI(
@@ -15,7 +15,7 @@ async def analyze_post(request: AnalysisRequest):
     Analyze incoming text posts for domain alignment and professionalism.
     """
     try:
-        result = analyze_content(request.user_text, request.registered_domain)
+        result = analyze_content(request.user_text, request.registered_domain, request.business_id)
         return result
         
     except ValueError as e:
