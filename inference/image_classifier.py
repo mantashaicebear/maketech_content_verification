@@ -2,9 +2,6 @@
 Image Classifier for Content Verification
 """
 
-import torch
-import torch.nn as nn
-import torchvision.transforms as transforms
 from PIL import Image
 import numpy as np
 from typing import Dict
@@ -13,11 +10,17 @@ class ImageClassifier:
     """Image classification using neural networks"""
     
     def __init__(self):
-        self.transform = transforms.Compose([
-            transforms.Resize((224, 224)),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-        ])
+        try:
+            import torchvision.transforms as transforms
+            self.transform = transforms.Compose([
+                transforms.Resize((224, 224)),
+                transforms.ToTensor(),
+                transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+            ])
+            self.torch_available = True
+        except (ImportError, OSError, RuntimeError):
+            self.torch_available = False
+            self.transform = None
         
         self.categories = [
             'food', 'tech', 'education', 'health', 'finance', 'fashion',
